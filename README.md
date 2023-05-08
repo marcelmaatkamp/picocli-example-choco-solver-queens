@@ -1,6 +1,6 @@
 # picocli example: solve queens puzzle with choco-solver  
 
-![img.png](docs/images/solution_8.png)
+![img.png](docs/images/solution_5.png)
 
 # Install
 
@@ -60,6 +60,8 @@ Solution: Q_0=3, Q_1=1, Q_2=4, Q_3=2,
 ```
 
 ## 5 queens
+
+![solution_5.png](docs/images/solution_5.png)
 
 ```bash
 $ ./build/native-image/queensSolver 5
