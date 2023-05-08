@@ -1,4 +1,4 @@
-# picocli example: solve queens puzzel with choco-solver  
+# picocli example: solve queens puzzle with choco-solver  
 
 ![img.png](docs/images/solution_8.png)
 
