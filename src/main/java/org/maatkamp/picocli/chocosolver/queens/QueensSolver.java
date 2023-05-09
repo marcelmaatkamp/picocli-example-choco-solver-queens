@@ -57,11 +57,11 @@ public class QueensSolver implements Callable<Integer> {
         // print solutions
         if(solutions != null && !solutions.isEmpty()) {
             for(Solution solution : solutions) {
-                System.out.printf(solution.toString().replace("Solution", System.lineSeparator()+"Solution"));
+                System.out.printf("%s %n", solution.toString().replace("Solution", System.lineSeparator()+"Solution"));
             }
             return 0;
         } else {
-            System.out.printf("No solution found for %s queens", queens);
+            System.out.printf("No solution found for %s queens %n", queens);
             return 1;
         }
     }

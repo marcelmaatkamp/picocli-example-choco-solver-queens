@@ -4,14 +4,12 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
-    dependencies {
-        classpath "gradle.plugin.org.mikeneck:graalvm-native-image-plugin:1.4.1"
-    }
 }
+
 plugins {
-    id "java"
+    id("application")
+    id("org.graalvm.buildtools.native") version("0.9.21")
 }
-apply plugin: "org.mikeneck.graalvm-native-image"
 
 group "info.picocli"
 version "1.0-SNAPSHOT"
@@ -36,20 +34,10 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
 }
 
-compileJava {
-    options.compilerArgs += [
-            "-Aproject=${project.group}/${project.name}",
-            "-Aother.resource.patterns=testkey.jks"
-    ]
-}
-
-test {
-    useJUnitPlatform()
-}
-test.dependsOn(tasks.getByName("nativeImage"))
-
-nativeImage {
-    graalVmHome = System.getProperty("java.home")
+application {
     mainClass = "org.maatkamp.picocli.chocosolver.queens.QueensSolver"
-    executableName = "queensSolver"
+}
+
+graalvmNative {
+    toolchainDetection = true
 }
