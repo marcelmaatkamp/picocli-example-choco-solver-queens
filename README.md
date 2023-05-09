@@ -37,7 +37,7 @@ $ gu install native-image
 Build package
 
 ```bash
-$ ./gradlew build
+$ ./gradlew nativeCompile
 ```
 
 # Usage
