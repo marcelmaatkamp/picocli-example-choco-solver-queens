@@ -5,9 +5,7 @@
 From [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle):
 
 <em>
-The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard so that no two queens threaten each other; thus, a solution requires that no two queens share the same row, column, or diagonal. There are 92 solutions. The problem was first posed in the mid-19th century. In the modern era, it is often used as an example problem for various computer programming techniques.
-
-The eight queens puzzle is a special case of the more general n queens problem of placing n non-attacking queens on an n×n chessboard. Solutions exist for all natural numbers n with the exception of n = 2 and n = 3. Although the exact number of solutions is only known for n ≤ 27, the asymptotic growth rate of the number of solutions is approximately (0.143 n)n.
+The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard so that no two queens threaten each other; thus, a solution requires that no two queens share the same row, column, or diagonal. There are 92 solutions. The problem was first posed in the mid-19th century. In the modern era, it is often used as an example problem for various computer programming techniques. The eight queens puzzle is a special case of the more general n queens problem of placing n non-attacking queens on an n×n chessboard. Solutions exist for all natural numbers n with the exception of n = 2 and n = 3. Although the exact number of solutions is only known for n ≤ 27, the asymptotic growth rate of the number of solutions is approximately (0.143 n)n.
 </em>
 
 # Install
@@ -45,14 +43,14 @@ $ ./gradlew nativeCompile
 ## 2 queens
 
 ```bash
-$ ./build/native-image/queensSolver 2
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 2
 No solution found for 2 queens%
 ```
 
 ## 3 queens
 
 ```bash
-$ ./build/native-image/queensSolver 3
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 3
 No solution found for 3 queens
 ```
 
@@ -61,7 +59,7 @@ No solution found for 3 queens
 ![img.png](docs/images/solution_4.png)
 
 ```bash
-$ ./build/native-image/queensSolver 4
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 4
 
 Solution: Q_0=2, Q_1=4, Q_2=1, Q_3=3, 
 Solution: Q_0=3, Q_1=1, Q_2=4, Q_3=2, 
@@ -72,7 +70,7 @@ Solution: Q_0=3, Q_1=1, Q_2=4, Q_3=2,
 ![solution_5.png](docs/images/solution_5.png)
 
 ```bash
-$ ./build/native-image/queensSolver 5
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 5
 
 Solution: Q_0=1, Q_1=3, Q_2=5, Q_3=2, Q_4=4, 
 Solution: Q_0=1, Q_1=4, Q_2=2, Q_3=5, Q_4=3, 
@@ -89,7 +87,7 @@ Solution: Q_0=3, Q_1=1, Q_2=4, Q_3=2, Q_4=5,
 ## 6 queens
 
 ```bash
-$ ./build/native-image/queensSolver 6
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 6
 
 Solution: Q_0=5, Q_1=3, Q_2=1, Q_3=6, Q_4=4, Q_5=2, 
 Solution: Q_0=3, Q_1=6, Q_2=2, Q_3=5, Q_4=1, Q_5=4, 
@@ -100,7 +98,7 @@ Solution: Q_0=2, Q_1=4, Q_2=6, Q_3=1, Q_4=3, Q_5=5,
 # 7 queens
 
 ```bash
-$ ./build/native-image/queensSolver 7
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 7
 
 Solution: Q_0=5, Q_1=7, Q_2=2, Q_3=6, Q_4=3, Q_5=1, Q_6=4, 
 Solution: Q_0=4, Q_1=2, Q_2=7, Q_3=5, Q_4=3, Q_5=1, Q_6=6, 
@@ -149,7 +147,7 @@ Solution: Q_0=3, Q_1=5, Q_2=7, Q_3=2, Q_4=4, Q_5=6, Q_6=1,
 ![solution_8.png](docs/images/solution_8.png)
 
 ```bash
-$ ./build/native-image/queensSolver 8         
+$ build/native/nativeCompile/picocli-example-choco-solver-queens 8         
 
 Solution: Q_0=7, Q_1=4, Q_2=2, Q_3=5, Q_4=8, Q_5=1, Q_6=3, Q_7=6, 
 Solution: Q_0=7, Q_1=4, Q_2=2, Q_3=8, Q_4=6, Q_5=1, Q_6=3, Q_7=5, 
