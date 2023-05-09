@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
         description = "Solves the queens problem in chocosolver via java as a picocli application")
 public class QueensSolver implements Callable<Integer> {
 
-    @Parameters(description = "number of queens")
+    @Parameters(description = "number of queens", defaultValue = "4")
     int queens;
 
     public static void main(String... args) {
@@ -30,7 +30,10 @@ public class QueensSolver implements Callable<Integer> {
     @Override
     public Integer call() {
 
-        Model model = new Model(queens + "-queens problem");
+        String banner = queens + "-queens problem:";
+        System.out.printf("Solutions for the %s: %n", banner);
+
+        Model model = new Model(banner);
         IntVar[] vars = new IntVar[queens];
 
         // define board
@@ -57,7 +60,7 @@ public class QueensSolver implements Callable<Integer> {
         // print solutions
         if(solutions != null && !solutions.isEmpty()) {
             for(Solution solution : solutions) {
-                System.out.printf("%s %n", solution.toString().replace("Solution", System.lineSeparator()+"Solution"));
+                System.out.printf("%s", solution.toString().replace("Solution", System.lineSeparator()+"Solution"));
             }
             return 0;
         } else {
