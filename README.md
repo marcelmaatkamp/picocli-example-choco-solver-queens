@@ -243,3 +243,13 @@ Solution: Q_0=1, Q_1=5, Q_2=8, Q_3=6, Q_4=3, Q_5=7, Q_6=2, Q_7=4,
 Solution: Q_0=5, Q_1=1, Q_2=8, Q_3=6, Q_4=3, Q_5=7, Q_6=2, Q_7=4, 
 
 ```
+
+# development
+
+## extract resources
+
+```bash
+$ ./gradlew -Pagent run
+```
+
+Output in `build/native/agent-output/run/reflect-config.json`

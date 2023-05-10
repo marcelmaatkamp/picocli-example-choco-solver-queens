@@ -29,6 +29,10 @@ dependencies {
     // chocosolver
     implementation("org.choco-solver:choco-solver:4.10.12")
 
+    // logging
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    implementation("ch.qos.logback:logback-classic:1.4.7")
+
     // test-classes
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
@@ -38,6 +42,56 @@ application {
     mainClass = "org.maatkamp.picocli.chocosolver.queens.QueensSolver"
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
 graalvmNative {
-    toolchainDetection = true
+    binaries {
+        metadataRepository {
+            // enabled = true
+            def extension = System.getProperty("extension", '')
+            def repo = file("config-directory${extension ? '.' + extension : ''}")
+            println("Using config repo: $repo")
+            uri(repo)
+        }
+        configureEach {
+            verbose = true
+            runtimeArgs.add("-DmessageClass=org.graalvm.internal.reflect.Message")
+        }
+        configureEach {
+            resources.autodetect()
+        }
+        main {
+            imageName.set('queenSolver')
+            buildArgs.add('--verbose')
+            buildArgs.add('--add-opens=java.base/java.nio=ALL-UNNAMED')
+            buildArgs.add('--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED')
+            buildArgs.add('--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED')
+            buildArgs.add('--trace-class-initialization=ch.qos.logback.classic.Logger')
+            buildArgs.add('--trace-object-instantiation=ch.qos.logback.core.AsyncAppenderBase$Worker')
+            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback')
+            buildArgs.add('--initialize-at-run-time=io.netty')
+        }
+    }
+}
+
+tasks.register("configZip", Zip) {
+    destinationDirectory = project.layout.projectDirectory
+    from(file("config-directory"))
+    archiveFileName = 'config-directory.zip'
+}
+
+tasks.register("configTarGz", Tar) {
+    destinationDirectory = project.layout.projectDirectory
+    compression = Compression.GZIP
+    from(file("config-directory"))
+    archiveFileName = 'config-directory.tar.gz'
+}
+
+tasks.register("configTarBz2", Tar) {
+    destinationDirectory = project.layout.projectDirectory
+    compression = Compression.BZIP2
+    from(file("config-directory"))
+    archiveFileName = 'config-directory.tar.bz2'
 }
