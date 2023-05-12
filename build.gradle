@@ -50,8 +50,8 @@ graalvmNative {
     binaries {
         metadataRepository {
             // enabled = true
-            def extension = System.getProperty("extension", '')
-            def repo = file("config-directory${extension ? '.' + extension : ''}")
+            def extension = System.getProperty("extension", "")
+            def repo = file("config-directory${extension ? "." + extension : ""}")
             println("Using config repo: $repo")
             uri(repo)
         }
@@ -63,15 +63,19 @@ graalvmNative {
             resources.autodetect()
         }
         main {
-            imageName.set('queenSolver')
-            buildArgs.add('--verbose')
-            buildArgs.add('--add-opens=java.base/java.nio=ALL-UNNAMED')
-            buildArgs.add('--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED')
-            buildArgs.add('--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED')
-            buildArgs.add('--trace-class-initialization=ch.qos.logback.classic.Logger')
-            buildArgs.add('--trace-object-instantiation=ch.qos.logback.core.AsyncAppenderBase$Worker')
-            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback')
-            buildArgs.add('--initialize-at-run-time=io.netty')
+            imageName.set("queenSolver")
+            buildArgs.add("--verbose")
+            buildArgs.add("--add-opens=java.base/java.nio=ALL-UNNAMED")
+            buildArgs.add("--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED")
+            buildArgs.add("--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED")
+            buildArgs.add("--trace-class-initialization=ch.qos.logback.classic.Logger")
+            buildArgs.add("--trace-object-instantiation=ch.qos.logback.core.AsyncAppenderBase$Worker")
+            buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback")
+            buildArgs.add("--initialize-at-run-time=io.netty")
+
+            buildArgs.add("--static")
+            buildArgs.add("--libc=musl")
+
         }
     }
 }
@@ -79,19 +83,19 @@ graalvmNative {
 tasks.register("configZip", Zip) {
     destinationDirectory = project.layout.projectDirectory
     from(file("config-directory"))
-    archiveFileName = 'config-directory.zip'
+    archiveFileName = "config-directory.zip"
 }
 
 tasks.register("configTarGz", Tar) {
     destinationDirectory = project.layout.projectDirectory
     compression = Compression.GZIP
     from(file("config-directory"))
-    archiveFileName = 'config-directory.tar.gz'
+    archiveFileName = "config-directory.tar.gz"
 }
 
 tasks.register("configTarBz2", Tar) {
     destinationDirectory = project.layout.projectDirectory
     compression = Compression.BZIP2
     from(file("config-directory"))
-    archiveFileName = 'config-directory.tar.bz2'
+    archiveFileName = "config-directory.tar.bz2"
 }
