@@ -4,4 +4,6 @@ services:
   queens:
     image: marcelmaatkamp/queens-graalvm-native-static:latest
     build: .
+      args:
+        GRAALVM_DOCKER_IMAGE: ${GRAALVM_DOCKER_IMAGE}
 
