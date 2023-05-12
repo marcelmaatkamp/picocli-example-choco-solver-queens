@@ -34,6 +34,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          build-args: |
+            "GRAALVM_DOCKER_IMAGE=${{ GITHUB_ENV_GRAALVM_DOCKER_IMAGE }}"
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
