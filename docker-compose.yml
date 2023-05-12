@@ -3,7 +3,7 @@ version: "3.8"
 services:
   queens:
     image: marcelmaatkamp/queens-graalvm-native-static:latest
-    build: .
+    build: 
       args:
         GRAALVM_DOCKER_IMAGE: ${GRAALVM_DOCKER_IMAGE}
 
