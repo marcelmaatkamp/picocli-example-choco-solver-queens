@@ -22,6 +22,12 @@ Install graalvm via sdkman
 $ sdk install java 22.3.2.r17-grl
 $ source ~/.sdkman/bin/sdkman-init.sh 
 ```
+
+### musl
+```bash
+$ sudo apt install musl-tools musl-dev
+```
+
 ### graalvm native-image
 
 Install graalvm-native-image via graalvm
