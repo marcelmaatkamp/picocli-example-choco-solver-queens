@@ -6,10 +6,11 @@ RUN \
 WORKDIR /application
 COPY . .
 RUN \
- ./gradlew nativeCompile
+ ./gradlew nativeCompile &&\
+ chmod +x /application/build/native/nativeCompile/queenSolver
 
 # ---
-FROM alpine 
-# scratch
-COPY --from=build /application/build/native/nativeCompile/queenSolver /usr/local/bin/queenSolver
-ENTRYPOINT /usr/local/bin/queenSolver
+FROM scratch
+COPY --from=build /application/build/native/nativeCompile/queenSolver /queenSolver
+ENTRYPOINT ["/queenSolver"]
+CMD ["6"]
