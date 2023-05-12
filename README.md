@@ -28,6 +28,11 @@ $ source ~/.sdkman/bin/sdkman-init.sh
 $ sudo apt install musl-tools musl-dev
 ```
 
+#### mac
+```bash
+$ brew install filosottile/musl-cross/musl-cross
+```
+
 ### graalvm native-image
 
 Install graalvm-native-image via graalvm
