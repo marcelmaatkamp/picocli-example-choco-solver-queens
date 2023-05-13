@@ -29,6 +29,9 @@ dependencies {
     // chocosolver
     implementation("org.choco-solver:choco-solver:4.10.12")
 
+    // langs3
+    implementation("org.apache.commons:commons-lang3:3.12.0")
+
     // logging
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
     implementation("ch.qos.logback:logback-classic:1.4.7")
