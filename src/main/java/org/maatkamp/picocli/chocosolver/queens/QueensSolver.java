@@ -1,5 +1,7 @@
 package org.maatkamp.picocli.chocosolver.queens;
 
+import com.almasb.fxgl.app.GameApplication;
+import com.almasb.fxgl.app.GameSettings;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -22,15 +24,23 @@ import java.util.concurrent.Callable;
 @Command(name = "queensSolver", mixinStandardHelpOptions = true,
         version = "queensSolver 1.0",
         description = "Solves the queens problem in chocosolver via java as a picocli application")
-public class QueensSolver implements Callable<Integer> {
+public class QueensSolver extends GameApplication implements Callable<Integer> {
 
     Logger log = LoggerFactory.getLogger(QueensSolver.class);
+
+    @Override
+    protected void initSettings(GameSettings settings) {
+        settings.setWidth(800);
+        settings.setHeight(600);
+        settings.setTitle("Basic Game App");
+    }
 
     @Parameters(description = "number of queens", defaultValue = "4")
     int queens;
 
     public static void main(String... args) {
         int exitCode;
+        launch(args);
         try (AnsiConsole ansi = AnsiConsole.windowsInstall()) {
             exitCode = new CommandLine(new QueensSolver()).execute(args);
         }
