@@ -91,7 +91,7 @@ public class QueensSolver implements Callable<Integer> {
             return 0;
 
         } else {
-            log.info("No solution found for {}} queens", queens);
+            log.info("No solution found for {} queens", queens);
 
             // exit error
             return 1;
