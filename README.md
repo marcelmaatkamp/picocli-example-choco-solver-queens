@@ -1,5 +1,7 @@
 # picocli example: solve queens puzzle with choco-solver
 
+[![Docker Image CI](https://github.com/marcelmaatkamp/picocli-example-choco-solver-queens/actions/workflows/docker.yml/badge.svg)](https://github.com/marcelmaatkamp/picocli-example-choco-solver-queens/actions/workflows/docker.yml)
+
 ![img.png](docs/images/solution_5.png)
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle):
