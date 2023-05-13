@@ -41,7 +41,9 @@ jobs:
           push: true
           tags: |
             ${{ github.repository }}:latest
+            ${{ github.repository }}:${{github.ref_name}}
             ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{github.ref_name}}
       - name: Sync readme.md to docker hub
         uses: ms-jpq/sync-dockerhub-readme@v1
         with:
