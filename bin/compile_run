@@ -1,0 +1,4 @@
+#!/bin/bash
+mvn gluonfx:build &&\
+mvn gluonfx:package
+mvn gluonfx:nativerun	

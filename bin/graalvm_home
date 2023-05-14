@@ -1,5 +1,2 @@
 #!/bin/bash
 export GRAALVM_HOME=/usr/local/java/contrib/jdk/gluonvm/graalvm-svm-java17-linux-gluon-22.1.0.1-Final
-mvn clean gluonfx:runagent &&\
-mvn gluonfx:build &&\
-mvn gluonfx:nativerun	
