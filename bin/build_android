@@ -1,0 +1,4 @@
+#!/bin/bash
+mvn -P android \
+ gluonfx:build \
+ gluonfx:package 

@@ -1,0 +1,5 @@
+#!/bin/bash
+mvn \
+ gluonfx:build \
+ gluonfx:package \
+ -P ios

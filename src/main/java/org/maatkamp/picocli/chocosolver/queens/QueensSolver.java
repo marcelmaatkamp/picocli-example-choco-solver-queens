@@ -2,6 +2,7 @@ package org.maatkamp.picocli.chocosolver.queens;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import javafx.scene.text.Text;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
@@ -17,6 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import static com.almasb.fxgl.dsl.FXGLForKtKt.addUINode;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
+
 @Command(name = "queensSolver", mixinStandardHelpOptions = true,
         version = "queensSolver 1.0",
         description = "Solves the queens problem in chocosolver via java as a picocli application")
@@ -29,6 +33,23 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         settings.setWidth(800);
         settings.setHeight(600);
         settings.setTitle("Basic Game App");
+        settings.setVersion("0.1");
+    }
+
+    @Override
+    protected void initUI() {
+        Text textPixels = new Text();
+        textPixels.setTranslateX(50); // x = 50
+        textPixels.setTranslateY(100); // y = 100
+        // textPixels.textProperty().bind(getip("pixelsMoved").asString());
+
+        addUINode(textPixels); // add to the scene graph
+
+        var brickTexture = texture("brick.png");
+        brickTexture.setTranslateX(50);
+        brickTexture.setTranslateY(450);
+
+        addUINode(brickTexture);
     }
 
     @Parameters(description = "number of queens", defaultValue = "4")
