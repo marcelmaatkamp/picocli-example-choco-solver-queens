@@ -2,13 +2,9 @@ package org.maatkamp.picocli.chocosolver.queens;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.solver.variables.RealVar;
-import org.chocosolver.solver.variables.SetVar;
-import org.chocosolver.solver.variables.Variable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
@@ -40,10 +36,10 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
 
     public static void main(String... args) {
         int exitCode;
-        launch(args);
         try (AnsiConsole ansi = AnsiConsole.windowsInstall()) {
             exitCode = new CommandLine(new QueensSolver()).execute(args);
         }
+        launch(args);
         System.exit(exitCode);
     }
 
@@ -56,16 +52,16 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         IntVar[] vars = new IntVar[queens];
 
         // define the chess-board
-        for(int q = 0; q < queens; q++){
-            vars[q] = model.intVar("Q_"+q, 1, queens);
+        for (int q = 0; q < queens; q++) {
+            vars[q] = model.intVar("Q_" + q, 1, queens);
         }
 
         // define and set constraints
-        for(int i  = 0; i < queens-1; i++){
-            for(int j = i + 1; j < queens; j++){
+        for (int i = 0; i < queens - 1; i++) {
+            for (int j = i + 1; j < queens; j++) {
 
                 // column constraint
-                model.arithm(vars[i], "!=",vars[j]).post();
+                model.arithm(vars[i], "!=", vars[j]).post();
 
                 // diagonal constraint
                 model.arithm(vars[i], "!=", vars[j], "-", j - i).post();
@@ -80,15 +76,15 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         log.info("Found {} solutions for the {}: ", solutions.size(), banner);
 
         // iterate and print each solution
-        if(solutions != null && !solutions.isEmpty()) {
+        if (solutions != null && !solutions.isEmpty()) {
             for (Solution solution : solutions) {
-                if(solution.exists()) {
+                if (solution.exists()) {
                     StringBuilder stringBuilder = new StringBuilder();
 
                     for (Iterator<IntVar> iterator = Arrays.stream(vars).iterator(); iterator.hasNext(); ) {
                         IntVar queen = iterator.next();
-                        stringBuilder.append(String.format("%s[%d]",queen.getName(), solution.getIntVal(queen)));
-                        if(iterator.hasNext()) {
+                        stringBuilder.append(String.format("%s[%d]", queen.getName(), solution.getIntVal(queen)));
+                        if (iterator.hasNext()) {
                             stringBuilder.append(", ");
                         }
                     }

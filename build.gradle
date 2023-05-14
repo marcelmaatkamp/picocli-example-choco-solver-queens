@@ -9,6 +9,8 @@ buildscript {
 plugins {
     id("application")
     id("org.graalvm.buildtools.native") version("0.9.21")
+    id("org.openjfx.javafxplugin") version("0.0.14")
+    // id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.18'
 }
 
 group "info.picocli"
@@ -16,6 +18,24 @@ version "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url "https://nexus.gluonhq.com/nexus/content/repositories/releases/"
+    }
+}
+
+javafx {
+    version = "20.0.1"
+    modules = [
+            "javafx.controls",
+            "javafx.graphics",
+            "javafx.fxml",
+            "javafx.swing",
+            "javafx.web",
+            "javafx.media"
+    ]
+    // configuration = 'compileOnly'
+    // configurations = [ 'implementation', 'testImplementation' ]
 }
 
 dependencies {
@@ -38,6 +58,15 @@ dependencies {
 
     // javafx
     implementation("com.github.almasb:fxgl:17.3")
+
+    // https://mvnrepository.com/artifact/org.openjfx/javafx-base
+    //    implementation("org.openjfx:javafx-controls:20.0.1")
+    //    implementation("org.openjfx:javafx-base:20.0.1")
+    //    implementation("org.openjfx:javafx-graphics:20.0.1")
+    //    implementation("org.openjfx:javafx-fxml:20.0.1")
+    //    implementation("org.openjfx:javafx-swing:20.0.1")
+    //    implementation("org.openjfx:javafx-web:20.0.1")
+    //    implementation("org.openjfx:javafx-media:20.0.1")
 
     // test-classes
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
@@ -79,7 +108,7 @@ graalvmNative {
             buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback")
             buildArgs.add("--initialize-at-run-time=io.netty")
 
-            buildArgs.add("--static")
+            // buildArgs.add("--static")
             buildArgs.add("--libc=musl")
 
         }
