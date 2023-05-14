@@ -18,37 +18,18 @@ Install [sdkman](https://sdkman.io/) for your platform.
 
 ### graalvm 
 
-Install graalvm via sdkman
+``
 
-```bash
-$ sdk install java 22.3.2.r17-grl
-$ source ~/.sdkman/bin/sdkman-init.sh 
-```
-
-### musl
-```bash
-$ sudo apt install musl-tools musl-dev
-```
-
-#### mac
-```bash
-$ brew install filosottile/musl-cross/musl-cross
-```
-
-### graalvm native-image
-
-Install graalvm-native-image via graalvm
-
-```bash
-$ gu install native-image 
-```
 
 ##  build
 
 Build package
 
 ```bash
-$ ./gradlew nativeCompile
+$ \
+ mvn clean gluonfx:runagent &&\
+ mvn gluonfx:build &&\
+ mvn gluonfx:nativerun
 ```
 
 # Usage
