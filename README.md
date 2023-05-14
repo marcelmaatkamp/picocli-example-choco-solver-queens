@@ -16,10 +16,20 @@ The eight queens puzzle is the problem of placing eight chess queens on an 8×8 
 
 Install [sdkman](https://sdkman.io/) for your platform.
 
-### graalvm 
 
-``
+### maven
 
+```bash
+$ sdk install maven 3.8.8
+```
+
+### graalvm gluon
+
+https://github.com/gluonhq/graal/releases
+
+```bash
+$ export GRAALVM_HOME=...
+```
 
 ##  build
 
