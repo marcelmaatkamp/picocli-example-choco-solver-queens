@@ -45,15 +45,20 @@
             <version>17.3</version>
         </dependency>
         <dependency>
+            <groupId>com.github.almasb</groupId>
+            <artifactId>fxgl-controllerinput</artifactId>
+            <version>17.3</version>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.4.7</version>
         </dependency>
-            <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.36</version>
-    </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
@@ -121,7 +126,10 @@
                     <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
