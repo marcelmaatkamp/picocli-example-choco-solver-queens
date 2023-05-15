@@ -2,6 +2,11 @@ package org.maatkamp.picocli.chocosolver.queens;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -18,8 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import static com.almasb.fxgl.dsl.FXGLForKtKt.addUINode;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
 
 @Command(name = "queensSolver", mixinStandardHelpOptions = true,
         version = "queensSolver 1.0",
@@ -48,6 +52,30 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         brickTexture.setTranslateY(450);
 
         addUINode(brickTexture);
+
+        Label nameLbl = new Label("Number of queens:");
+        TextField nameFld = new TextField();
+        Label msg = new Label();
+        msg.setStyle("-fx-text-fill: blue;");
+        Button sayHelloBtn = new Button("Submit");
+        Button exitBtn = new Button("Exit");
+        sayHelloBtn.setOnAction(e -> {
+            String name = nameFld.getText();
+            if (name.trim().length() > 0) {
+                msg.setText("Hello " + name);
+            } else {
+                msg.setText("Hello there");
+            }
+        });
+
+        exitBtn.setOnAction(e -> Platform.exit());
+
+
+        VBox root = new VBox();
+        root.setSpacing(5);
+        root.getChildren().addAll(nameLbl, nameFld, msg,
+                                  sayHelloBtn, exitBtn);
+        addUINode(root);
     }
 
     @Parameters(description = "number of queens", defaultValue = "4")
@@ -62,9 +90,7 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         System.exit(exitCode);
     }
 
-    @Override
-    public Integer call() {
-
+    private List<Solution> solve(int queens) {
         String banner = queens + "-queens problem";
 
         Model model = new Model(banner);
@@ -91,11 +117,20 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         // solve
         List<Solution> solutions = model.getSolver().findAllSolutions();
 
+        return solutions;
+    }
+
+    @Override
+    public Integer call() {
+        String banner = queens + "-queens problem";
+
+        List<Solution> solutions = solve(queens);
+
         // print solutions
         Logger.info("Found {} solutions for the {}: ", solutions.size(), banner);
 
         // iterate and print each solution
-        if (solutions != null && !solutions.isEmpty()) {
+        if (!solutions.isEmpty()) {
             for (Solution solution : solutions) {
                 if (solution.exists()) {
                     StringBuilder stringBuilder = new StringBuilder();
