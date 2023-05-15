@@ -22,7 +22,6 @@
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <gluonfx.maven.plugin.version>1.0.18</gluonfx.maven.plugin.version>
-        <gluonfx.target>host</gluonfx.target>
 
         <graal.version>19.3.0.2</graal.version>
         <picocli.version>4.7.3</picocli.version>
@@ -117,12 +116,19 @@
                 </configuration>
             </plugin>
 
+
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>gluonfx-maven-plugin</artifactId>
                 <version>${gluonfx.maven.plugin.version}</version>
                 <configuration>
-                    <target>${gluonfx.target}</target>
+                    <target>${client.target}</target>
+                    <attachList>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                        <list>statusbar</list>
+                        <list>storage</list>
+                    </attachList>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
@@ -133,7 +139,6 @@
     <profiles>
         <profile>
             <id>desktop</id>
-
             <properties>
                 <client.target>host</client.target>
             </properties>
