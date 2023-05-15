@@ -60,16 +60,14 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         Button sayHelloBtn = new Button("Submit");
         Button exitBtn = new Button("Exit");
         sayHelloBtn.setOnAction(e -> {
-            String name = nameFld.getText();
-            if (name.trim().length() > 0) {
-                msg.setText("Hello " + name);
-            } else {
-                msg.setText("Hello there");
+            String queensS = nameFld.getText();
+            if (!queensS.isBlank() && !queensS.isEmpty()) {
+                int queens = Integer.parseInt(queensS);
+                List<Solution> solutions = solve(queens);
             }
         });
 
         exitBtn.setOnAction(e -> Platform.exit());
-
 
         VBox root = new VBox();
         root.setSpacing(5);
