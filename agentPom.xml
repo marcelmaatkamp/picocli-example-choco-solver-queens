@@ -15,7 +15,6 @@
     <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
     <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <gluonfx.target>host</gluonfx.target>
     <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -40,14 +39,14 @@
       <version>17.3</version>
     </dependency>
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.4.7</version>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-api</artifactId>
+      <version>2.5.0</version>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.36</version>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-impl</artifactId>
+      <version>2.5.0</version>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
@@ -112,7 +111,13 @@
         <artifactId>gluonfx-maven-plugin</artifactId>
         <version>${gluonfx.maven.plugin.version}</version>
         <configuration>
-          <target>${gluonfx.target}</target>
+          <target>${client.target}</target>
+          <attachList>
+            <list>display</list>
+            <list>lifecycle</list>
+            <list>statusbar</list>
+            <list>storage</list>
+          </attachList>
           <mainClass>${main.class}</mainClass>
         </configuration>
       </plugin>
@@ -121,6 +126,9 @@
   <profiles>
     <profile>
       <id>desktop</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <client.target>host</client.target>
       </properties>
@@ -139,9 +147,6 @@
     </profile>
     <profile>
       <id>web</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <client.target>web</client.target>
       </properties>

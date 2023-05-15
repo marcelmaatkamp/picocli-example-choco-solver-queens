@@ -6,8 +6,8 @@ import javafx.scene.text.Text;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.tinylog.Logger;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
@@ -25,8 +25,6 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
         version = "queensSolver 1.0",
         description = "Solves the queens problem in chocosolver via java as a picocli application")
 public class QueensSolver extends GameApplication implements Callable<Integer> {
-
-    Logger log = LoggerFactory.getLogger(QueensSolver.class);
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -94,7 +92,7 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
         List<Solution> solutions = model.getSolver().findAllSolutions();
 
         // print solutions
-        log.info("Found {} solutions for the {}: ", solutions.size(), banner);
+        Logger.info("Found {} solutions for the {}: ", solutions.size(), banner);
 
         // iterate and print each solution
         if (solutions != null && !solutions.isEmpty()) {
@@ -110,7 +108,7 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
                         }
                     }
 
-                    log.info(stringBuilder.toString());
+                    Logger.info(stringBuilder.toString());
                 }
             }
 
@@ -118,7 +116,7 @@ public class QueensSolver extends GameApplication implements Callable<Integer> {
             return 0;
 
         } else {
-            log.info("No solution found for {} queens", queens);
+            Logger.info("No solution found for {} queens", queens);
 
             // exit error
             return 1;
